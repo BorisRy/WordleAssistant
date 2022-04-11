@@ -15,16 +15,16 @@ const instructions = document.querySelector('.instructions');
 
 function change_tile_state({target}){
     if (target.classList.length < 2 || (target.classList.length == 2 && target.classList.contains('focus'))) {
-        target.classList.add('correct');
-    } else if (target.classList.contains('correct')) {
-        target.classList.remove('correct');
-        target.classList.add('present');
-    } else if (target.classList.contains('present')) {
-        target.classList.remove('present');
         target.classList.add('absent');
     } else if (target.classList.contains('absent')) {
         target.classList.remove('absent');
+        target.classList.add('present');
+    } else if (target.classList.contains('present')) {
+        target.classList.remove('present');
         target.classList.add('correct');
+    } else if (target.classList.contains('correct')) {
+        target.classList.remove('correct');
+        target.classList.add('absent');
     }
 }
 

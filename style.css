@@ -329,3 +329,14 @@ p {
     width: 200px;
     margin: none;
 }
+@media (max-width: 380px) {
+    .header > h3{
+        font-size: 15px;
+    }
+
+    header .title {
+        font-size: 32px;
+    }
+
+
+}
