@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Wordle Assistant</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="instructions hidden">
+            <div class="instructions-container">
+                <div class="header">
+                    <h3>Suck at Wordle? Not sure which word to use next? Let me help!</h3>
+                    <button class="close-instructions"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="step step1">
+                    <p><span class="stepnum">1</span>Start your Wordle game</p>
+                    <img src="./images/step1.jpg" alt="">
+                </div>
+                <div class="step step2">
+                    <p><span class="stepnum">2</span>Fill up the Wordle Assistant to look the same as your Wordle board</p>
+                    <img src="./images/step2.png" alt="">
+                    <p>(Tap/click each tile until the colors match)</p>
+                    <img id="gif" src="./images/clickontiles.gif" alt="">
+                </div>
+                <div class="step step3">
+                    <p><span class="stepnum">3</span>Click on 'Get Words' to find all matching words!</p>
+                    <p>(Make sure the marker is on the last tile of the last word you typed in!)</p>
+                    <img src="./images/step3.png" alt="">
+                </div>
+                <div class="step step4">
+                    <p><span class="stepnum">4</span>All the words that match the given hints will appear in the 'Matching words' box!</p>
+                    <img src="./images/step4.png" alt="">
+                </div>
+                <div class="step step5">
+                    <p><span class="stepnum">5</span>Win and impress your family/twitter followers/crush with your sick Wordle score!</p>
+                    <img src="./images/step5.png" alt="">
+                </div>
+            </div>
+        </div>
+
+
+        <header>
+            <button class="instructions-open"> <i class="fa-solid fa-circle-info"></i></button>
+            <div class="title">Wordle Assistant</div>
+            <button> <a href="https://github.com/silentheron"><i class="fa-brands fa-github"></i></a></button>
+        </header>
+        
+        <div id="game">
+            <div class="bad-input hidden">
+                <p>ALL tiles must be filled and colored!</p>
+                <img src="./images/bad input.png" alt="">
+                <p>(Tap me to remove)</p>
+            </div>
+            <div id="board-wordbox">
+                <div id="board-container">
+                    <div id="board">
+                        <div class="row">
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                        </div>
+                        <div class="row">
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                        </div>
+                        <div class="row">
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                        </div>
+                        <div class="row">
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                        </div>
+                        <div class="row">
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                            <div class="tile"></div>
+                        </div>
+                    </div>
+                    <button id="get-words">Get Words <i class="fa-brands fa-get-pocket"></i></button>
+                </div>
+                <div id="wordbox-container">
+                    <h1>Matching words:</h1>
+                    <div id="wordbox"></div>
+                    
+                </div>
+            </div>
+            <div id="keyboard">
+                <div class="k-row">
+                    <button class="key">Q</button>
+                    <button class="key">W</button>
+                    <button class="key">E</button>
+                    <button class="key">R</button>
+                    <button class="key">T</button>
+                    <button class="key">Y</button>
+                    <button class="key">U</button>
+                    <button class="key">I</button>
+                    <button class="key">O</button>
+                    <button class="key">P</button>
+                </div>
+                <div class="k-row">
+                    <button class="key">A</button>
+                    <button class="key">S</button>
+                    <button class="key">D</button>
+                    <button class="key">F</button>
+                    <button class="key">G</button>
+                    <button class="key">H</button>
+                    <button class="key">J</button>
+                    <button class="key">K</button>
+                    <button class="key">L</button>
+                </div>
+                <div class="k-row">
+                    <button class="bigger" id="enter"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                    <button class="key">Z</button>
+                    <button class="key">X</button>
+                    <button class="key">C</button>
+                    <button class="key">V</button>
+                    <button class="key">B</button>
+                    <button class="key">N</button>
+                    <button class="key">M</button>
+                    <button class="bigger" id="delete"><i class="fa-solid fa-delete-left"></i></button>
+                </div>
+                <div class="k-row">
+                    <button id="reset-board">Reset Board</button>
+                    
+                </div>
+            </div>
+        </div>
+
+        <script src="words.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
