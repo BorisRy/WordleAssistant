@@ -271,6 +271,13 @@ keys.forEach(function(key) {
             let next_tile = current_row[tile_tracker+1];
             current_tile.innerHTML = key.innerHTML;
 
+            // Automatically color tiles
+            if(correct_pattern.includes(key.innerHTML)) {
+                current_tile.classList.add('correct');
+            } else if(Object.keys(present_letters).includes(key.innerHTML)) {
+                current_tile.classList.add('present');
+            }
+
             if(tile_tracker < 4) {
                 current_tile.classList.remove('focus');
             }
@@ -287,7 +294,12 @@ del.addEventListener('click', function(){
     if(tile_tracker > 0) {
         tile_tracker--;
         current_row[tile_tracker].innerHTML = '';
+        current_row[tile_tracker].classList.remove('correct');
+        current_row[tile_tracker].classList.remove('present');
+        current_row[tile_tracker].classList.remove('abesnt');
+
         current_row[tile_tracker].classList.add('focus');
+
         if(tile_tracker < 4) {
             current_row[tile_tracker+1].classList.remove('focus');
         }
@@ -352,10 +364,34 @@ getWords.addEventListener('click', function(){
             
         }
         find_matching_words(correct_pattern, present_letters, present_patterns, absent_letters);
-    } else if(row_tracker > 4) {
-        console.log('booba');
-    } 
+
+
+        const matchingWords = document.querySelectorAll('.word');
+        matchingWords.forEach((word)=> word.addEventListener('click', function() {
+            for(let tile of current_row) {
+                tile.classList.remove('present');
+                tile.classList.remove('correct');
+                tile.classList.remove('absent');
+            }
+            for(let i = 0; i < 5; i++) {
+                current_row[i].innerHTML = word.innerHTML[i];
+                current_row[i].classList.remove('focus');
+                if(correct_pattern.includes(word.innerHTML[i])) {
+                    current_row[i].classList.add('correct');
+                } else if(Object.keys(present_letters).includes(word.innerHTML[i])) {
+                    current_row[i].classList.add('present');
+                }
+            }
+            current_row[current_row.length-1].classList.add('focus');
+            tile_tracker = current_row.length;
+        }))
+
+
+    }
     else {
         badInput.classList.remove('hidden');
     }
 })
+
+
+
