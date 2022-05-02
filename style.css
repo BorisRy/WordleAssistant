@@ -137,6 +137,22 @@ h1 {
     overflow: auto;
 }
 
+.no-match {
+    background-color: #cc3300;
+    color: white;
+    border: 1px solid #787c7e;
+    border-radius: 4px;
+    width: 90%;
+    padding: 3%;
+    margin: 3% 1%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+}
+
 
 /* Keyboard */
 #keyboard {
@@ -176,8 +192,8 @@ button, a {
     position: absolute;
     top: 15%;
     left: 6%;
-    background-color: #1f1515;
-    color: rgb(233, 135, 135) !important;
+    background-color: #636060;
+    color: #cc3300 !important;
     border-radius: 4px;
     display: flex;
     flex-direction: column;

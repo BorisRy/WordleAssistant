@@ -10,6 +10,7 @@ const badInput = document.querySelector('.bad-input');
 const openInstructions = document.querySelector('.instructions-open');
 const closeInstructions = document.querySelector('.close-instructions');
 const instructions = document.querySelector('.instructions');
+const no_match = document.querySelector('.no-match');
 
 
 
@@ -117,6 +118,7 @@ function join_pattern(existing, add_to_existing) {
 }
 
 function contains_all(word, letters_array) {
+    // Check if a word contains a set of letters
     arr = []
     letters_array.forEach(letter => {
         arr.push(word.includes(letter))
@@ -124,6 +126,7 @@ function contains_all(word, letters_array) {
     return !arr.includes(false)
 }
 function contains_none(word, letters_array) {
+    // Check if a word contains none of the letters in a set of letters
     arr = []
     letters_array.forEach(letter => {
         arr.push(word.includes(letter))
@@ -137,10 +140,12 @@ function matches_none(word, regex_array) {
     regex_array.forEach(pattern => {
         arr.push(pattern.test(word))
     })
+    console.log(`word: ${word} array: ${arr}`);
     return !arr.includes(true)
 }
 
 function count_appearances(letter, arr) {
+    // returns the number of times a letter appears in an iterable
     let appearance = 0;
     arr.forEach(index=>{
         if(index===letter){
@@ -151,6 +156,7 @@ function count_appearances(letter, arr) {
 }
 
 function next_row() {
+    // Moves the onto the next row in the board
     if(verify_row(current_row) && row_tracker < 4) {
         deactivate_row(current_row);
         row_tracker++;
@@ -168,6 +174,7 @@ function next_row() {
 }
 
 function add_to_present(correct_pattern, present_pattern, dict) {
+    // Adds all present letters to an array
     let dict_keys = []
     for (const [key, value] of Object.entries(dict)){
         dict_keys.push(key);
@@ -229,6 +236,7 @@ function check_appearances(word, present_letters) {
 }
 
 function find_matching_words(correct_pattern, present_letters, present_patterns, absent_letters) {
+    // Filters a list of words by the hints
     let present_letters_key = []
     for (const [key, value] of Object.entries(present_letters)){
         present_letters_key.push(key);
@@ -276,6 +284,8 @@ keys.forEach(function(key) {
                 current_tile.classList.add('correct');
             } else if(Object.keys(present_letters).includes(key.innerHTML)) {
                 current_tile.classList.add('present');
+            } else {
+                current_tile.classList.add('absent');
             }
 
             if(tile_tracker < 4) {
@@ -363,9 +373,15 @@ getWords.addEventListener('click', function(){
             absent_letters = add_to_absent(hints.absent, correct_pattern, present_letters, present_patterns, absent_letters);
             
         }
+
         find_matching_words(correct_pattern, present_letters, present_patterns, absent_letters);
+        if (wordbox.innerHTML === '') {
+            console.log('your mom a hoe');
+            wordbox.innerHTML += '<div class="no-match">No Matching Words</div>'
+        }
+        
 
-
+        // Clickable Words
         const matchingWords = document.querySelectorAll('.word');
         matchingWords.forEach((word)=> word.addEventListener('click', function() {
             for(let tile of current_row) {
@@ -380,6 +396,8 @@ getWords.addEventListener('click', function(){
                     current_row[i].classList.add('correct');
                 } else if(Object.keys(present_letters).includes(word.innerHTML[i])) {
                     current_row[i].classList.add('present');
+                } else {
+                    current_row[i].classList.add('absent');
                 }
             }
             current_row[current_row.length-1].classList.add('focus');
